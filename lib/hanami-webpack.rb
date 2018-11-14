@@ -4,7 +4,6 @@ require 'hanami/utils/blank'
 require 'hanami/config/security'
 require_relative 'hanami_webpack/view_helper'
 require_relative 'hanami_webpack/dev_server'
-require_relative 'hanami_webpack/security_headers_hijack'
 
 if Hanami::Utils::Blank.blank?(ENV['WEBPACK_MANIFEST_FILE'])
   ENV['WEBPACK_MANIFEST_FILE'] = 'webpack_manifest.json'
@@ -25,8 +24,6 @@ end
 if Hanami::Utils::Blank.blank?(ENV['INBUILT_WEBPACK_DEV_SERVER'])
   ENV['INBUILT_WEBPACK_DEV_SERVER'] = 'true'
 end
-
-Hanami::Config::Security.prepend(HanamiWebpack::SecurityHeadersHijack)
 
 Hanami::Server.prepend(HanamiWebpack::DevServer)
 
