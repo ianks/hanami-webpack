@@ -8,5 +8,5 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/samuelsimoes/hanami-webpack'
   s.license     = 'MIT'
 
-  s.add_dependency 'hanami'
+  s.add_dependency 'hanami-utils'
 end

@@ -1,7 +1,4 @@
-require 'hanami/server'
-require 'hanami/view'
 require 'hanami/utils/blank'
-require 'hanami/config/security'
 require_relative 'hanami_webpack/view_helper'
 require_relative 'hanami_webpack/dev_server'
 
@@ -25,6 +22,16 @@ if Hanami::Utils::Blank.blank?(ENV['INBUILT_WEBPACK_DEV_SERVER'])
   ENV['INBUILT_WEBPACK_DEV_SERVER'] = 'true'
 end
 
-Hanami::Server.prepend(HanamiWebpack::DevServer)
+begin
+  require 'hanami/server'
+  Hanami::Server.prepend(HanamiWebpack::DevServer)
+rescue LoadError
+  # ok
+end
 
-Hanami::View.prepend(HanamiWebpack::ViewHelper)
+begin
+  require 'hanami/view'
+  Hanami::View.prepend(HanamiWebpack::ViewHelper)
+rescue LoadError
+  # ok
+end
